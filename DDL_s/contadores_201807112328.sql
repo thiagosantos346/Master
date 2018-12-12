@@ -1,5 +1,7 @@
-﻿INSERT INTO public.contadores (id,nome,endereco,complemento,cidade,estado,cep,telefone,celular,email,condominiosativos,datainclusao,dataultimaalteracao,bloquearboletosautomaticamente,senha) VALUES 
-(1,'r Celebca','ho  ','ulu Loand Nyozogham Rund','ofispoa S','AM','7890123','012345678','78901234','fgfhgf@dfasd.comasd',1,'2018-07-11 00:00:00.000','2015-07-11 00:00:00.000','s','uasdfqewr5')
+﻿INSERT INTO public.contadores (id,nome,cpf,cidade,estado,cep,telefone,email,condominiosativos,datainclusao,senha) VALUES 
+(1,'José','111111111','Goiânia','GO','74320070','32334646','jose@hotmail.com','1','12/12/2018','qweasdzxc')
+
+
 ,(2,'ugu Fleno Thu','oa S','penGair Gubiho  Weataemgog Uldulas X','Bofispoa S','GO','1234567','901234567','89012345','fasd.comasdfgfhgf@d',1,'2018-07-01 00:00:00.000','2015-07-01 00:00:00.000','n','234g5asdf')
 ,(3,'Loand Nyo','Thur',' Loand Nyozogham Runda',' Borulu ','ED','3456789','345678901','23456789','omasdfgfhgf@dfasd.c',1,'2018-06-21 00:00:00.000','2015-06-21 00:00:00.000','n','erzxcvnmvbn')
 ,(4,'lu Loand N','ar T','urinhaenui Muhae Lokluy Annd','ho  We','DF','5678901','890123456','23456789','omasdfgfhgf@dfasd.c',1,'2018-06-11 00:00:00.000','2015-06-11 00:00:00.000','s','rtyuasdfqewr5qwe')
