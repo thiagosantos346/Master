@@ -5,6 +5,9 @@
 ,(4,'lu Loand N','ar T','urinhaenui Muhae Lokluy Annd','ho  We','DF','5678901','890123456','23456789','omasdfgfhgf@dfasd.c',1,'2018-06-11 00:00:00.000','2015-06-11 00:00:00.000','s','rtyuasdfqewr5qwe')
 ,(5,'apen','ndar','lebcapenGair Gubiho  Weataemgog Uldulas','lu Loand','AC','4567890','567890123','45678901','d.comasdfgfhgf@dfas',1,'2018-06-01 00:00:00.000','2015-06-01 00:00:00.000','n','asdfqewr5qwerq344dfg')
 ,(6,'e Borulu Lo','urin','elebcapenGair Gubiho  Weataemgo',' Weata','LA','3456789','123456789','90123456','f@dfasd.comasdfgfhg',1,'2018-05-22 00:00:00.000','2015-05-22 00:00:00.000','s','5qwerq344dfg3')
+
+---------------FIM---------------------------
+
 ,(7,'Labere Bor','Xyet','ndar Thurinhaenui Muhae Lokluy Anndî','y Ann','AC','5678901','456789012','67890123','d.comasdfgfhgf@dfas',1,'2018-05-12 00:00:00.000','2015-05-12 00:00:00.000','s','ff4f5234523')
 ,(8,'apenGair Gub','d Ny',' Bimar Labere Borulu Loand Nyozo','Laber','CE','4567890','678901234','78901234','fasd.comasdfgfhgf@d',1,'2018-05-02 00:00:00.000','2015-05-02 00:00:00.000','n','qwerzxcvnmvbnrt')
 ,(9,'nndîr Cle','g Bo','ar Thurinhaenui Muhae Lokluy Anndîr Cl','spoa ','AL','1234567','456789012','67890123','fasd.comasdfgfhgf@d',1,'2018-04-22 00:00:00.000','2015-04-22 00:00:00.000','s','344dfg354')
