@@ -1,5 +1,7 @@
-﻿INSERT INTO public.condominios (contador,codigo,nome,cnpj,endereco,cep,cidade,estado,totalunidades,diavencimento,tipounidade,inativo,datainclusao,dataultimaalteracao,senhaacesso) VALUES 
-(1,1,'haenui Muhae Loklu','50825080001929','A 123','74890340','Goiani','AP',10000,5,'DP','s','2018-07-09 00:00:00.000','2018-07-10 00:00:00.000','wer23412')
+﻿INSERT INTO public.condominios (contador,codigo,nome,cnpj,endereco,cep,cidade,estado,totalunidades,diavencimento,senhaacesso) VALUES 
+(1,1,'haenui','50825080001929','rua 3','74890340','Goiânia','GO','10','6','wer23412')
+
+
 ,(1,1,'y Anndîr Cleo','50800019295082','2345R','74890340','sseeGoi','AP',10000,5,'PP','s','2018-07-07 00:00:00.000','2018-07-09 00:00:00.000','fasdfaas')
 ,(1,1,'is Turing Bofispoa Sharbo Bimar','19295082508000','345RU','74890340','aaasss','AP',10000,5,'AP','n','2018-07-05 00:00:00.000','2018-07-08 00:00:00.000','sdfaasdf')
 ,(1,1,'poa Sharbo Bimar Labere Bo','00019295082508','A 123','74890340','aaaaas','AP',10000,5,'PP','n','2018-07-03 00:00:00.000','2018-07-07 00:00:00.000','r2341234')
