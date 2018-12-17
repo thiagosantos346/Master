@@ -1,39 +1,42 @@
-﻿INSERT INTO public.usuarios (id,contador,nome,nomeresumido,senha,administrador,contadores_id) VALUES 
-(1,1,'no T','Ul','vxzcbgwe','s',889)
-,(2,2,'abere Bo','ais ','sdfasdfa','n',437)
-,(3,3,' Runda','Loa','sdfasdfa','s',728)
-,(4,4,'Bofis','re B','fasdfasd','s',675)
-,(5,5,'nhaenui ','inh','asdfxcvx','s',56)
-,(6,6,'ozogham ','Turi','asdfasdf','n',241)
-,(7,7,'Gubiho','dîr','asdfasdf','n',623)
-,(8,8,'Thurin','d Ny','tasdfasd','s',637)
-,(9,9,'eno Th','Bor','werasdfx','s',710)
-,(10,10,'elebcap','nndî','rtasdfas','n',661)
+﻿INSERT INTO public.usuarios (id,contador,nome,senha,administrador) VALUES 
+(1,1,'Alberto','vxzcbgwe','s')
+,(2,1,'Regina','sdfasdfa','n')
+,(3,1,' Rubia','sdfasdfa','s')
+,(4,1,'Denis','fasdfasd','s')
+,(5,1,'Danilo','asdfxcvx','s')
+,(1,2,'Rogerio','asdfasdf','n')
+,(2,2,'Roger','asdfasdf','n')
+,(3,2,'Thiago','tasdfasd','s')
+,(4,2,'Paula','werasdfx','s')
+,(5,2,'Leticia','rtasdfas','n')
+,(1,3,'Patricia','asdfasdf','n')
+,(2,3,'Julia','sdfasdfa','n')
+,(3,3,'Bruno','xcvxzcbg','s')
+,(4,3,'Neto','tasdfasd','n')
+,(5,3,'Allan ','asdfasdf','s')
+,(1,4,'Wanessa','wertasdf','n')
+,(2,4,'Maria','werqwera','n')
+,(3,4,'Marina','sdfxcvxz','n')
+,(4,4,'Igor','asdfaqwe','n')
+,(5,4,'Daniela','asdfasdf','n')
+,(1,5,'Mariana','cbgwerta','n')
+,(2,5,'Reginaldo','vxzcbgwe','s')
+,(3,5,'Adailton','dfasdfas','n')
+,(4,5,' Edilson','qwerqwer','n')
+,(5,5,'Robert','sdfxcvxz','n')
+,(1,6,' Edson','erasdfxc','s')
+,(2,6,'Matheus','dfasdfas','n')
+,(3,6,'Fabricio','rqwerasd','s')
+,(4,6,'Maria','rtasdfas','n')
+,(5,6,'Mauricio','vxzcbgwe','n')
 ;
-INSERT INTO public.usuarios (id,contador,nome,nomeresumido,senha,administrador,contadores_id) VALUES 
-(11,11,'poa ','rulu','asdfasdf','n',962)
-,(12,12,'  Wea','og U','sdfasdfa','n',608)
-,(13,13,'oand Nyo','nndî','xcvxzcbg','s',461)
-,(14,14,'ais T','r Cl','tasdfasd','n',716)
-,(15,15,'zogham ',' Thu','asdfasdf','s',75)
-,(16,16,'g Uldul','in','wertasdf','n',783)
-,(17,17,'ring Bof','Labe','werqwera','n',299)
-,(18,18,'elebcap','Muha','sdfxcvxz','n',658)
-,(19,19,'inhaenu','Cl','asdfaqwe','n',115)
-,(20,20,'dar T','gu ','asdfasdf','n',931)
-;
-INSERT INTO public.usuarios (id,contador,nome,nomeresumido,senha,administrador,contadores_id) VALUES 
-(21,21,'mar La',' T','cbgwerta','n',971)
-,(22,22,'a Sh',' Loa','vxzcbgwe','s',245)
-,(23,23,'ham R','rul','dfasdfas','n',145)
-,(24,24,' Labere','m R','qwerqwer','n',76)
-,(25,25,'eataemg','Th','sdfxcvxz','n',950)
-,(26,26,' Turi','o Th','erasdfxc','s',485)
-,(27,27,'uy A','aenu','dfasdfas','n',382)
-,(28,28,'aenu','abe','rqwerasd','s',898)
-,(29,29,'Muhae Lo','isp','rtasdfas','n',965)
-,(30,30,'uhae ','We','vxzcbgwe','n',194)
-;
+
+
+
+
+
+------fim------
+
 INSERT INTO public.usuarios (id,contador,nome,nomeresumido,senha,administrador,contadores_id) VALUES 
 (31,31,'zogham ','Gubi','aqwerqwe','n',672)
 ,(32,32,'ho  ','s ','rqwerasd','n',810)
