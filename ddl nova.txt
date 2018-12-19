@@ -1,0 +1,178 @@
+CREATE TABLE public.avisos (
+    condominio integer NOT NULL,
+    id integer NOT NULL,
+    resumo character varying(80) DEFAULT NULL::character varying,
+    datainicial timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    datafinal timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    texto character varying(16384) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.avisos OWNER TO postgres;
+
+--
+-- TOC entry 199 (class 1259 OID 74379)
+-- Name: blocos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.blocos (
+    condominio integer NOT NULL,
+    codigo integer NOT NULL,
+    nome character varying(60) DEFAULT ''::character varying
+);
+
+
+ALTER TABLE public.blocos OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 74412)
+-- Name: boletos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.boletos (
+    condominio integer NOT NULL,
+    id integer NOT NULL,
+    status smallint DEFAULT 1,
+    unidade integer NOT NULL,
+    mes integer NOT NULL,
+    ano integer NOT NULL,
+    datavencto timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    datapagto timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    valor numeric(15,2) DEFAULT 0,
+    observacoes character varying(16384) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.boletos OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 74341)
+-- Name: condominios; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.condominios (
+    contador integer NOT NULL,
+    codigo integer NOT NULL,
+    nome character varying(80) DEFAULT ''::character varying,
+    cnpj character varying(18) DEFAULT ''::character varying,
+    endereco character varying(60) DEFAULT ''::character varying,
+    totalunidades integer,
+    diavencimento smallint,
+    tipounidade character varying(20) DEFAULT NULL::character varying,
+    inativo character(1) DEFAULT 'N'::bpchar,
+    datainclusao timestamp(0) without time zone DEFAULT NULL::timestamp without time zone
+);
+
+
+ALTER TABLE public.condominios OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 74322)
+-- Name: contadores; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.contadores (
+    id integer NOT NULL,
+    nome character varying(80) DEFAULT ''::character varying,
+    endereco character varying(80) DEFAULT ''::character varying,
+    telefone character varying(30) DEFAULT ''::character varying,
+    condominiosativos integer DEFAULT 0,
+    datainclusao timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    bloquearboletosautomaticamente character varying(1) DEFAULT 'N'::character varying
+);
+
+
+ALTER TABLE public.contadores OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 74443)
+-- Name: plano_contas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.plano_contas (
+    condominio integer NOT NULL,
+    conta character varying(40) NOT NULL,
+    codigoreduzido integer NOT NULL,
+    nome character varying(80) DEFAULT ''::character varying,
+    tipo character(1) DEFAULT 'S'::bpchar,
+    contasuperior character varying(40) DEFAULT NULL::character varying,
+    banco integer,
+    agencia character varying(6) DEFAULT ''::character varying,
+    nomebanco character varying(40) DEFAULT ''::character varying,
+    vencimento timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    tipocontabancaria smallint DEFAULT 2
+);
+
+
+ALTER TABLE public.plano_contas OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 74464)
+-- Name: sindicos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.sindicos (
+    condominio integer NOT NULL,
+    id integer NOT NULL,
+    datainicial timestamp(0) without time zone NOT NULL,
+    datafinal timestamp(0) without time zone NOT NULL,
+    sindico character varying(60) DEFAULT NULL::character varying,
+    subsindico character varying(60) DEFAULT NULL::character varying,
+    datanascimento timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
+    cpf character varying(14) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.sindicos OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 74479)
+-- Name: tipos_patrimonio; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tipos_patrimonio (
+    contador integer NOT NULL,
+    codigo integer NOT NULL,
+    nome character varying(80) DEFAULT NULL::character varying,
+    nomepesquisa character varying(80) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.tipos_patrimonio OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 74391)
+-- Name: unidades; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.unidades (
+    condominio integer NOT NULL,
+    id integer NOT NULL,
+    bloco integer NOT NULL,
+    unidade character varying(10) NOT NULL,
+    nomemorador character varying(60) DEFAULT ''::character varying,
+    telefone character varying(16) DEFAULT ''::character varying,
+    cnpj_cpf character varying(18) DEFAULT ''::character varying,
+    nomeproprietario character varying(60) DEFAULT ''::character varying,
+    email character varying(80) DEFAULT ''::character varying,
+    diavencimento integer
+);
+
+
+ALTER TABLE public.unidades OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1259 OID 74491)
+-- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuarios (
+    id integer NOT NULL,
+    contador integer NOT NULL,
+    nome character varying(80) DEFAULT NULL::character varying,
+    administrador character(1) DEFAULT NULL::bpchar,
+    contadores_id integer NOT NULL
+);
+
+
+ALTER TABLE public.usuarios OWNER TO postgres;
