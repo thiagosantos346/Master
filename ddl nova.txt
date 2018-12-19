@@ -1,3 +1,4 @@
+--d
 CREATE TABLE public.avisos (
     condominio integer NOT NULL,
     id integer NOT NULL,
