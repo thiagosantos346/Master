@@ -48,3 +48,52 @@ INSERT INTO public.avisos
 VALUES(2, 2, 'EleiÃ§Ã£o para sindico dia 09/06/2018'::character varying, '09/01/2018'::timestamp without time zone, '09/06/2018'::timestamp without time zone, 'NÃ£o se esqueÃ§am de votar'::character varying);
 
 
+INSERT INTO public.blocos
+(condominio, codigo, nome, nomepesquisa)
+VALUES(1, 1, 'A'::character varying, 'Bloco A'::character varying);
+
+INSERT INTO public.blocos
+(condominio, codigo, nome, nomepesquisa)
+VALUES(1, 2, 'B'::character varying, 'Bloco B'::character varying);
+
+INSERT INTO public.blocos
+(condominio, codigo, nome, nomepesquisa)
+VALUES(2, 1, 'SA'::character varying, 'Bloco SA'::character varying);
+
+INSERT INTO public.blocos
+(condominio, codigo, nome, nomepesquisa)
+VALUES(2, 2, 'SB'::character varying, 'Bloco SB'::character varying);
+
+
+
+---INSERT INTO public.unidades
+--(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+--VALUES(1, 1, 1, '1', 'Joser Romario'::character varying, '9874-5612'::character varying, '118.973.824-48'::character varying, 'iandanieldasneves-76@prodam.am.gov.br'::character varying, 1);
+
+INSERT INTO public.unidades
+(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+VALUES(1, 1, 1, '1', 'Joser Romario', '9874-5612', '118.973.824-48', 'iandanieldasneves-76@prodam.am.gov.br', 1);
+INSERT INTO public.unidades
+(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+VALUES(1, 2, 1, '2', 'Giovanni Pedro Henrique Araújo', '(61) 2991-8907', '971.846.416-63', 'giovannipedrohenriquearaujo__giovannipedrohenriquearaujo@ruilacos.com.br', 10);
+INSERT INTO public.unidades
+(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+VALUES(1, 3, 2, '1', 'Henrique Lorenzo Dias', '(55) 2721-2701', '977.214.969-93', 'henriquelorenzodias-84@agenciaph.com', 15);
+INSERT INTO public.unidades
+(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+VALUES(1, 4, 2, '2', 'Sebastiana Fátima', '(95) 2757-6404', '656.492.788-65', 'iianjorgeoliveira@tce.am.gov.br', 10);
+
+INSERT INTO public.unidades
+(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+VALUES(2, 1, 1, '1', 'Figuiere Romario', '9874-5612', '118.973.824-48', 'iandanieldasneves-76@prodam.am.gov.br', 1);
+INSERT INTO public.unidades
+(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+VALUES(2, 2, 1, '2', 'Giov Pedo Henrique Araújo', '(61) 2991-8907', '971.846.416-63', 'giovannipedrohenriquearaujo__giovannipedrohenriquearaujo@ruilacos.com.br', 10);
+INSERT INTO public.unidades
+(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+VALUES(2, 3, 2, '1', 'Henrique Lorenzo Dias', '(55) 2721-2701', '977.214.969-93', 'henriquelorenzodias-84@agenciaph.com', 15);
+INSERT INTO public.unidades
+(condominio, id, bloco, unidade, nomemorador, telefone, cnpj_cpf, email, diavencimento)
+VALUES(2, 4, 2, '2', 'Sebastiana Fátima', '(95) 2757-6404', '656.492.788-65', 'iianjorgeoliveira@tce.am.gov.br', 10);
+
+
