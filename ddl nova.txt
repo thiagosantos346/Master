@@ -1,178 +1,220 @@
-CREATE TABLE public.avisos (
-    condominio integer NOT NULL,
-    id integer NOT NULL,
-    resumo character varying(80) DEFAULT NULL::character varying,
-    datainicial timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
-    datafinal timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
-    texto character varying(16384) DEFAULT NULL::character varying
+-- =============================================================================
+-- Diagram Name: bda
+-- Created on: 20/12/2018 16:51:06
+-- Diagram Version: 
+-- =============================================================================
+
+
+CREATE TABLE "avisos" (
+	"condominio" int4 NOT NULL,
+	"id" int4 NOT NULL,
+	"resumo" varchar(80) DEFAULT NULL::character varying,
+	"datainicial" timestamp(0) DEFAULT NULL::timestamp without time zone,
+	"datafinal" timestamp(0) DEFAULT NULL::timestamp without time zone,
+	"texto" varchar(16384) DEFAULT NULL::character varying,
+	CONSTRAINT "avisos_pkey" PRIMARY KEY("condominio","id")
+)
+WITH (
+	OIDS = False
 );
 
+ALTER TABLE "avisos" OWNER TO "postgres";
 
-ALTER TABLE public.avisos OWNER TO postgres;
-
---
--- TOC entry 199 (class 1259 OID 74379)
--- Name: blocos; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.blocos (
-    condominio integer NOT NULL,
-    codigo integer NOT NULL,
-    nome character varying(60) DEFAULT ''::character varying
+CREATE TABLE "blocos" (
+	"condominio" int4 NOT NULL,
+	"codigo" int4 NOT NULL,
+	"nome" varchar(60) DEFAULT ''::character varying,
+	"nomepesquisa" varchar(60) DEFAULT NULL::character varying,
+	CONSTRAINT "blocos_pkey" PRIMARY KEY("condominio","codigo")
+)
+WITH (
+	OIDS = False
 );
 
+ALTER TABLE "blocos" OWNER TO "postgres";
 
-ALTER TABLE public.blocos OWNER TO postgres;
-
---
--- TOC entry 201 (class 1259 OID 74412)
--- Name: boletos; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.boletos (
-    condominio integer NOT NULL,
-    id integer NOT NULL,
-    status smallint DEFAULT 1,
-    unidade integer NOT NULL,
-    mes integer NOT NULL,
-    ano integer NOT NULL,
-    datavencto timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
-    datapagto timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
-    valor numeric(15,2) DEFAULT 0,
-    observacoes character varying(16384) DEFAULT NULL::character varying
+CREATE TABLE "boletos" (
+	"condominio" int4 NOT NULL,
+	"id" int4 NOT NULL,
+	"status" int2 DEFAULT 1,
+	"unidade" int4 NOT NULL,
+	"mes" int4 NOT NULL,
+	"ano" int4 NOT NULL,
+	"datavencto" timestamp(0) DEFAULT NULL::timestamp without time zone,
+	"datapagto" timestamp(0) DEFAULT NULL::timestamp without time zone,
+	"valor" numeric(15,2) DEFAULT 0,
+	"valorrecebido" numeric(15,2) DEFAULT 0,
+	"observacoes" varchar(16384) DEFAULT NULL::character varying,
+	CONSTRAINT "boletos_pkey" PRIMARY KEY("condominio","id")
+)
+WITH (
+	OIDS = False
 );
 
+ALTER TABLE "boletos" OWNER TO "postgres";
 
-ALTER TABLE public.boletos OWNER TO postgres;
-
---
--- TOC entry 197 (class 1259 OID 74341)
--- Name: condominios; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.condominios (
-    contador integer NOT NULL,
-    codigo integer NOT NULL,
-    nome character varying(80) DEFAULT ''::character varying,
-    cnpj character varying(18) DEFAULT ''::character varying,
-    endereco character varying(60) DEFAULT ''::character varying,
-    totalunidades integer,
-    diavencimento smallint,
-    tipounidade character varying(20) DEFAULT NULL::character varying,
-    inativo character(1) DEFAULT 'N'::bpchar,
-    datainclusao timestamp(0) without time zone DEFAULT NULL::timestamp without time zone
+CREATE TABLE "condominios" (
+	"contador" int4 NOT NULL,
+	"codigo" int4 NOT NULL,
+	"nome" varchar(80) DEFAULT ''::character varying,
+	"cnpj" varchar(18) DEFAULT ''::character varying,
+	"endereco" varchar(60) DEFAULT ''::character varying,
+	"cep" varchar(9) DEFAULT ''::character varying,
+	"diavencimento" int2,
+	"inativo" char(1) DEFAULT 'N'::bpchar,
+	"datainclusao" timestamp(0) DEFAULT NULL::timestamp without time zone,
+	CONSTRAINT "condominios_pkey" PRIMARY KEY("codigo")
+)
+WITH (
+	OIDS = False
 );
 
+ALTER TABLE "condominios" OWNER TO "postgres";
 
-ALTER TABLE public.condominios OWNER TO postgres;
-
---
--- TOC entry 196 (class 1259 OID 74322)
--- Name: contadores; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.contadores (
-    id integer NOT NULL,
-    nome character varying(80) DEFAULT ''::character varying,
-    endereco character varying(80) DEFAULT ''::character varying,
-    telefone character varying(30) DEFAULT ''::character varying,
-    condominiosativos integer DEFAULT 0,
-    datainclusao timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
-    bloquearboletosautomaticamente character varying(1) DEFAULT 'N'::character varying
+CREATE TABLE "contadores" (
+	"id" int4 NOT NULL,
+	"nome" varchar(80) DEFAULT ''::character varying,
+	"endereco" varchar(80) DEFAULT ''::character varying,
+	"telefone" varchar(30) DEFAULT ''::character varying,
+	"email" varchar(80) DEFAULT ''::character varying,
+	"bloquearboletosautomaticamente" varchar(1) DEFAULT 'N'::character varying,
+	CONSTRAINT "contadores_pkey" PRIMARY KEY("id")
+)
+WITH (
+	OIDS = False
 );
 
+ALTER TABLE "contadores" OWNER TO "postgres";
 
-ALTER TABLE public.contadores OWNER TO postgres;
-
---
--- TOC entry 202 (class 1259 OID 74443)
--- Name: plano_contas; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.plano_contas (
-    condominio integer NOT NULL,
-    conta character varying(40) NOT NULL,
-    codigoreduzido integer NOT NULL,
-    nome character varying(80) DEFAULT ''::character varying,
-    tipo character(1) DEFAULT 'S'::bpchar,
-    contasuperior character varying(40) DEFAULT NULL::character varying,
-    banco integer,
-    agencia character varying(6) DEFAULT ''::character varying,
-    nomebanco character varying(40) DEFAULT ''::character varying,
-    vencimento timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
-    tipocontabancaria smallint DEFAULT 2
+CREATE TABLE "plano_contas" (
+	"condominio" int4 NOT NULL,
+	"conta" varchar(40) NOT NULL,
+	"nome" varchar(80) DEFAULT ''::character varying,
+	"banco" int4,
+	"agencia" varchar(6) DEFAULT ''::character varying,
+	"contabancaria" varchar(15) DEFAULT ''::character varying,
+	CONSTRAINT "plano_contas_pkey" PRIMARY KEY("condominio","conta")
+)
+WITH (
+	OIDS = False
 );
 
+ALTER TABLE "plano_contas" OWNER TO "postgres";
 
-ALTER TABLE public.plano_contas OWNER TO postgres;
-
---
--- TOC entry 203 (class 1259 OID 74464)
--- Name: sindicos; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.sindicos (
-    condominio integer NOT NULL,
-    id integer NOT NULL,
-    datainicial timestamp(0) without time zone NOT NULL,
-    datafinal timestamp(0) without time zone NOT NULL,
-    sindico character varying(60) DEFAULT NULL::character varying,
-    subsindico character varying(60) DEFAULT NULL::character varying,
-    datanascimento timestamp(0) without time zone DEFAULT NULL::timestamp without time zone,
-    cpf character varying(14) DEFAULT NULL::character varying
+CREATE TABLE "sindicos" (
+	"condominio" int4 NOT NULL,
+	"id" int4 NOT NULL,
+	"sindico" varchar(60) DEFAULT NULL::character varying,
+	"datanascimento" timestamp(0) DEFAULT NULL::timestamp without time zone,
+	"cpf" varchar(14) DEFAULT NULL::character varying,
+	CONSTRAINT "sindicos_pkey" PRIMARY KEY("condominio","id")
+)
+WITH (
+	OIDS = False
 );
 
+ALTER TABLE "sindicos" OWNER TO "postgres";
 
-ALTER TABLE public.sindicos OWNER TO postgres;
-
---
--- TOC entry 204 (class 1259 OID 74479)
--- Name: tipos_patrimonio; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.tipos_patrimonio (
-    contador integer NOT NULL,
-    codigo integer NOT NULL,
-    nome character varying(80) DEFAULT NULL::character varying,
-    nomepesquisa character varying(80) DEFAULT NULL::character varying
+CREATE TABLE "tipos_patrimonio" (
+	"contador" int4 NOT NULL,
+	"codigo" int4 NOT NULL,
+	"nome" varchar(80) DEFAULT NULL::character varying,
+	"nomepesquisa" varchar(80) DEFAULT NULL::character varying,
+	CONSTRAINT "tipos_patrimonio_pkey" PRIMARY KEY("contador","codigo")
+)
+WITH (
+	OIDS = False
 );
 
+ALTER TABLE "tipos_patrimonio" OWNER TO "postgres";
 
-ALTER TABLE public.tipos_patrimonio OWNER TO postgres;
-
---
--- TOC entry 200 (class 1259 OID 74391)
--- Name: unidades; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.unidades (
-    condominio integer NOT NULL,
-    id integer NOT NULL,
-    bloco integer NOT NULL,
-    unidade character varying(10) NOT NULL,
-    nomemorador character varying(60) DEFAULT ''::character varying,
-    telefone character varying(16) DEFAULT ''::character varying,
-    cnpj_cpf character varying(18) DEFAULT ''::character varying,
-    nomeproprietario character varying(60) DEFAULT ''::character varying,
-    email character varying(80) DEFAULT ''::character varying,
-    diavencimento integer
+CREATE TABLE "unidades" (
+	"condominio" int4 NOT NULL,
+	"id" int4 NOT NULL,
+	"bloco" int4 NOT NULL,
+	"unidade" varchar(10) NOT NULL,
+	"nomemorador" varchar(60) DEFAULT ''::character varying,
+	"telefone" varchar(16) DEFAULT ''::character varying,
+	"cnpj_cpf" varchar(18) DEFAULT ''::character varying,
+	"email" varchar(80) DEFAULT ''::character varying,
+	"diavencimento" int4,
+	CONSTRAINT "unidades_pkey" PRIMARY KEY("condominio","id")
+)
+WITH (
+	OIDS = False
 );
 
-
-ALTER TABLE public.unidades OWNER TO postgres;
-
---
--- TOC entry 205 (class 1259 OID 74491)
--- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.usuarios (
-    id integer NOT NULL,
-    contador integer NOT NULL,
-    nome character varying(80) DEFAULT NULL::character varying,
-    administrador character(1) DEFAULT NULL::bpchar,
-    contadores_id integer NOT NULL
-);
+ALTER TABLE "unidades" OWNER TO "postgres";
 
 
-ALTER TABLE public.usuarios OWNER TO postgres;
+ALTER TABLE "avisos" ADD CONSTRAINT "fk_avisoscond" FOREIGN KEY ("condominio")
+	REFERENCES "condominios"("codigo")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE NO ACTION
+	NOT DEFERRABLE;
+
+ALTER TABLE "blocos" ADD CONSTRAINT "fk_blocoscond" FOREIGN KEY ("condominio")
+	REFERENCES "condominios"("codigo")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE NO ACTION
+	NOT DEFERRABLE;
+
+ALTER TABLE "boletos" ADD CONSTRAINT "fk_boletoscond" FOREIGN KEY ("condominio")
+	REFERENCES "condominios"("codigo")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE NO ACTION
+	NOT DEFERRABLE;
+
+ALTER TABLE "boletos" ADD CONSTRAINT "fk_boletosund" FOREIGN KEY ("condominio", "unidade")
+	REFERENCES "unidades"("condominio", "id")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE NO ACTION
+	NOT DEFERRABLE;
+
+ALTER TABLE "condominios" ADD CONSTRAINT "fk_condcontador" FOREIGN KEY ("contador")
+	REFERENCES "contadores"("id")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE NO ACTION
+	NOT DEFERRABLE;
+
+ALTER TABLE "plano_contas" ADD CONSTRAINT "fk_planocontascond" FOREIGN KEY ("condominio")
+	REFERENCES "condominios"("codigo")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE NO ACTION
+	NOT DEFERRABLE;
+
+ALTER TABLE "sindicos" ADD CONSTRAINT "fk_sindicoscond" FOREIGN KEY ("condominio")
+	REFERENCES "condominios"("codigo")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE NO ACTION
+	NOT DEFERRABLE;
+
+ALTER TABLE "tipos_patrimonio" ADD CONSTRAINT "fk_tipospatr01" FOREIGN KEY ("contador")
+	REFERENCES "contadores"("id")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+	NOT DEFERRABLE;
+
+ALTER TABLE "unidades" ADD CONSTRAINT "fk_unidadesbloco" FOREIGN KEY ("condominio", "bloco")
+	REFERENCES "blocos"("condominio", "codigo")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+	NOT DEFERRABLE;
+
+ALTER TABLE "unidades" ADD CONSTRAINT "fk_unidadescond" FOREIGN KEY ("condominio")
+	REFERENCES "condominios"("codigo")
+	MATCH SIMPLE
+	ON DELETE CASCADE
+	ON UPDATE NO ACTION
+	NOT DEFERRABLE;
+
+
