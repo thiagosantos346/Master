@@ -395,15 +395,86 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 
 # 2. Duas consultas aninhadas pela cláusula FROM;
 
+	--2.1) Gerando uma nova tabela na clausula from sem usar junções
+		select conta_cond.*
+			from (
+			select cond.nome as  nomeContador, cont.nome as nome_cont
+			from public.contadores  as cont, public.condominios as cond 
+			where cond.codigo = cont.id
+			
+			) as conta_cond
+
 # 3. quatro consultas envolvendo os operadores como IN, SOME, ANY, ALL, EXISTS e UNIQUE;
 
+	--3.1) selecione o nome todos moradores do bloco A
+
+	select public.unidades.nomemorador
+	from public.unidades
+	where public.unidades.bloco in (select public.blocos.codigo from public.blocos where public.blocos.nome = 'A' )
+
+	--3.2) selecione o nome todos moradores do bloco A - sem usar in
+
+	select public.unidades.nomemorador
+	from public.unidades
+	where public.unidades.bloco = any (select public.blocos.codigo from public.blocos where public.blocos.nome = 'A' )
+
+	--3.2) Existe algum algum boleto para o unidade 1 do bloco A, traga o valor dele
+
+	SELECT public.boletos.valor
+	FROM public.boletos
+	WHERE EXISTS
+	(SELECT bole.id 
+	FROM public.boletos as bole 
+	join public.unidades  as uni on  uni.id = bole.id
+	where uni.id = 1 and uni.bloco = 1 )
+
+	--3.3) selecione o boleto com o maior valor de todos
+
+	select public.boletos.valor, public.boletos.unidade
+	from public.boletos 
+	where public.boletos.valor >= all ( select public.boletos.valor from public.boletos )
+
+	--3.4) Selecione todos os boletos que tem valores maiores que a media de todos os boletos por unidade
+
+	select avg(public.boletos.valor), public.boletos.unidade
+	from public.boletos 
+	where public.boletos.valor >= all ( select avg(public.boletos.valor) from public.boletos group by 	 
+	public.boletos.unidade )
+	group by public.boletos.unidade
+
+
 # 4. uma consulta envolvendo a operação de junção definida na cláusula FROM;
+	
+	--4.1) todos os blocos do condominio 1
+	select * from public.condominios as cond join public.blocos  as bloc on cond.codigo = bloc.codigo
+
 
 # 5. duas consultas envolvendo outer joins;
 
+	--5.1) todos avisos e todas as unidades
+	
+	select c.nome, a.texto from public.condominios c FULL OUTER JOIN public.avisos a on c.codigo = a.id
+
+	--5.2) todos os contadores e todos condominios		
+	select c.nome, cont.nome from public.condominios c FULL OUTER JOIN public.contadores cont on c.codigo = cont.id
+
 # 6. duas consultas envolvendo agrupamentos e agregações;
 
+	--6.1 - media de todos boletos por mês
+
+	select avg(public.boletos.valor), boletos.mes from public.boletos group by public.boletos.mes
+	--6.2 - maior boleto 
+
+	select max(public.boletos.valor) from public.boletos
+
 # 7. uma consulta envolvendo a cláusula HAVING;
+
+ 	--7.1)Quantidades de boletosa agrupados por mês, nos meses anteriores a junho 
+ 
+	select count(*) as me, b.mes 
+	from public.boletos as b
+	group by b.mes
+	having mes < 6
 
 # 8. duas operações de inserção, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
 tabela, isto é, tabelas envolvidas em restrições de integridade;
