@@ -380,6 +380,19 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 
 # 1. Duas consultas realizando duas operações diferentes sobre conjuntos (união, interseção ou diferença);
 
+  	## 1) Selecione o dia de todas as movimentações de blocos e unidades, maiores ou iguais ao dia 1
+	SELECT public.unidades.diavencimento  from public.unidades where public.unidades.diavencimento >= 1 
+	UNION
+	SELECT public.condominios.diavencimento  from public.condominios where public.condominios.diavencimento >= 1 
+	
+	## 2) União de todos os avisos dos condominios junto ao seus  nomes como escalar
+	
+	
+	SELECT public.condominios.nome FROM public.condominios 
+	UNION
+	SELECT public.avisos.texto FROM public.avisos;
+
+
 # 2. Duas consultas aninhadas pela cláusula FROM;
 
 # 3. quatro consultas envolvendo os operadores como IN, SOME, ANY, ALL, EXISTS e UNIQUE;
