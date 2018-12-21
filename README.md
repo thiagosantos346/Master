@@ -9,6 +9,11 @@ Bando de dados 2018 2
   
   #scripts contendo expressões SQL (DDL e consultas)
   
+  #Criação e população do banco
+  https://github.com/thiagosantos346/Master/blob/master/dmp.sql
+  
+  A Lista de consultas sob o banco está no final.
+  
   # slides da apresentação
   
   
