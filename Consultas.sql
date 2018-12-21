@@ -43,3 +43,9 @@ SELECT COUNT(b.codigo), b.condominio
 FROM blocos b
 GROUP BY condominio
 HAVING COUNT(b.codigo) > 5
+
+SELECT COUNT(b.codigo), b.condominio
+FROM blocos b inner join condominio c on b.condominio = c.codigo
+where c.cidade = 'Goiania'
+GROUP BY b.condominio
+HAVING COUNT(*)
