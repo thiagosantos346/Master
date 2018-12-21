@@ -469,17 +469,19 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 
 # 7. uma consulta envolvendo a cláusula HAVING;
 
- 	--7.1)Quantidades de boletosa agrupados por mês, nos meses anteriores a junho 
- 
-	select count(*) as me, b.mes 
-	from public.boletos as b
-	group by b.mes
-	having mes < 6
+ 	--7.1) Quantidades de boletos  agrupados por mês, nos meses anteriores a junho 
+
+		select count(*) as me, b.mes 
+		from public.boletos as b
+		group by b.mes
+		having mes < 6
 
 # 8. duas operações de inserção, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
 
-tabela, isto é, tabelas envolvidas em restrições de integridade;
-
+	--7.1) INSERT INTO public.avisos (condominio, id, resumo, datainicial, datafinal, texto) VALUES (1, 1, 'Eleições', 		'2018-12-21 10:24:41', '2019-12-21 10:24:41', 'Participe das Eleições de sindico');
+	
+	--7.1) INSERT INTO public.blocos (condominio, codigo, nome, nomepesquisa) VALUES (1, 1, 'A', 'Bloco A');
+	
 # 9. duas operações de deleção, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
 
 	--9.1 Deletando todos os  boltros da unidades do bloco 1
@@ -513,8 +515,6 @@ tabela, isto é, tabelas envolvidas em restrições de integridade;
 	create view bloc_uni as 
 	select condominio,codigo,unidade,nomemorador
 	from blocos natural join unidades
-
-
 
 
 
