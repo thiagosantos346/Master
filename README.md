@@ -477,13 +477,43 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 	having mes < 6
 
 # 8. duas operações de inserção, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
+
 tabela, isto é, tabelas envolvidas em restrições de integridade;
 
 # 9. duas operações de deleção, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
 
-# 10. duas operações de modificação, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
+	--9.1 Deletando todos os  boltros da unidades do bloco 1
+	delete from unidades using boletos where unidades.bloco = 1 and unidades.id = boletos.unidade;
 
+	--9.1) deltetando todos os avisos do condominio 1
+	delete from avisos as av where av.condominio = 1;	
+
+# 10. duas operações de modificação, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
+	
+	10.1) Alterando o nome do condomidio 1 para 'FLAMBOYANT'
+	
+		update condominios
+		set nome= 'FLAMBOYANT'
+		WHERE CODIGO=1
+		
+	11.1) 	Alterado todos os avisos dos condominio 1
+		UPDATE avisos as c
+		SET resumo = 'Novo'
+		FROM condominios
+		WHERE condominio = codigo and comdomio = 1;
+	
 # 11. criação de duas visões;
+
+	--11.1)
+	CREATE VIEW CONTGERAL as 
+	select contador  ,codigo 
+	from condominios as cond inner join contadores as cont on cond.contador = cont.id
+	
+	--11.2)
+	create view bloc_uni as 
+	select condominio,codigo,unidade,nomemorador
+	from blocos natural join unidades
+
 
 
 
