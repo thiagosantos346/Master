@@ -22,26 +22,26 @@ Bando de dados 2018 2
 
 # Descrição do Mini mundo
 
-#Foi pedido por uma agencia de contabilidade que administra contas de condomínio que registrasse os dados de seu condomínio;
+#Foi pedido por uma agência de contabilidade que administra contas de condomínio e que registrasse os dados de seus condomínio;
 
 
-Sendo que cada contador possui, um nome, endereço telefone e-mail e e tem a e registram a opção de broquelar os boletos de todo o condomínio, pois essa regra é publica e afeta todo o condomínio, mas pode ser diferente para cada condomínio.
+	Sendo que cada contador possui, um nome, endereço telefone e-mail e tem a opção de registrar a opção de broquelar os boletos de todos o condomínios, pois essa regra é publica e afeta todo o condomínio, mas pode ser diferente para cada condomínio.
 
 
-Cada codomínio tem a estrutura básica de ter:
+	Cada codomínio tem essa estrutura básica:
 # N Avisos:
-Os avisos são meios de comunicação do contador e do condomínio.
-Assim ele conta com Nome, código e um nome de pesquisa que pode ser usado como resumo, do aviso.
+	Os avisos são meios de comunicação do contador e do condomínio.
+	Assim ele conta com Nome, código e um nome de pesquisa que pode ser usados como resumo, do aviso.
 
 # N plano de Contas:
-Cada um dos N registros guarda dados bancários(Banco, Agencia, e Conta Bancaria) do condomínio, o nome da despesa
+	Cada um dos N registros guarda dados bancários(Banco, Agencia, e Conta Bancaria) do condomínio, o nome da despesas.
 
 # N Síndicos:
-O síndicos também são registrados para posteriormente gerar dados fiscais a respeito deles,  para isso se anota o cpf, dada de nascimento.
+	O síndicos também são registrados para posteriormente gerar dados fiscais a respeito deles,  para isso se anota o cpf, dada de nascimento.
 
 # N Blocos:
-Os blocos estão diretamente associados ao condomínio e as N unidades constituites, são um modo de agrupar e localizar cada unidade(Apartamento, casa, etc...).
-Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n unidades registradas neste bloco.
+	Os blocos estão diretamente associados ao condomínio e as N unidades constituites, são um modo de agrupar e localizar cada unidade(Apartamento, casa, etc...).
+	Assim usam ss identificadores do Condomínio ao qual ele está hospedado e das n unidades registradas neste bloco.
 
 # N Unidades:
     Cada uma dessa unidades, possuem um o numero do bloco que essa faz parte, e também do condomínio, nome do morador, telefone do morador, cpf ou cnpj para gerar boletos, e-mail para envio dos boletos e um dia de vencimento, que será usado para emissão dos boletos.
@@ -380,14 +380,14 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 
 # 1. Duas consultas realizando duas operações diferentes sobre conjuntos (união, interseção ou diferença);
 
-  	## 1) Selecione o dia de todas as movimentações de blocos e unidades, maiores ou iguais ao dia 1
+--1.2) Selecione o dia de todas as movimentações de blocos e unidades, maiores ou iguais ao dia 1
+	
 	SELECT public.unidades.diavencimento  from public.unidades where public.unidades.diavencimento >= 1 
 	UNION
 	SELECT public.condominios.diavencimento  from public.condominios where public.condominios.diavencimento >= 1 
 	
-	## 2) União de todos os avisos dos condominios junto ao seus  nomes como escalar
-	
-	
+--1.2) União de todos os avisos dos condominios junto ao seus  nomes como escalar
+
 	SELECT public.condominios.nome FROM public.condominios 
 	UNION
 	SELECT public.avisos.texto FROM public.avisos;
@@ -395,30 +395,31 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 
 # 2. Duas consultas aninhadas pela cláusula FROM;
 
-	--2.1) Gerando uma nova tabela na clausula from sem usar junções
-		select conta_cond.*
-			from (
-			select cond.nome as  nomeContador, cont.nome as nome_cont
-			from public.contadores  as cont, public.condominios as cond 
-			where cond.codigo = cont.id
-			
-			) as conta_cond
+--2.1) Gerando uma nova tabela na clausula from sem usar junções
+	
+	select conta_cond.*
+		from (
+		select cond.nome as  nomeContador, cont.nome as nome_cont
+		from public.contadores  as cont, public.condominios as cond 
+		where cond.codigo = cont.id
+
+		) as conta_cond
 
 # 3. quatro consultas envolvendo os operadores como IN, SOME, ANY, ALL, EXISTS e UNIQUE;
 
-	--3.1) selecione o nome todos moradores do bloco A
+--3.1) selecione o nome todos moradores do bloco A
 
 	select public.unidades.nomemorador
 	from public.unidades
 	where public.unidades.bloco in (select public.blocos.codigo from public.blocos where public.blocos.nome = 'A' )
 
-	--3.2) selecione o nome todos moradores do bloco A - sem usar in
+--3.2) selecione o nome todos moradores do bloco A - sem usar in
 
 	select public.unidades.nomemorador
 	from public.unidades
 	where public.unidades.bloco = any (select public.blocos.codigo from public.blocos where public.blocos.nome = 'A' )
 
-	--3.2) Existe algum algum boleto para o unidade 1 do bloco A, traga o valor dele
+--3.2) Existe algum algum boleto para o unidade 1 do bloco A, traga o valor dele
 
 	SELECT public.boletos.valor
 	FROM public.boletos
@@ -428,13 +429,13 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 	join public.unidades  as uni on  uni.id = bole.id
 	where uni.id = 1 and uni.bloco = 1 )
 
-	--3.3) selecione o boleto com o maior valor de todos
+--3.3) selecione o boleto com o maior valor de todos
 
 	select public.boletos.valor, public.boletos.unidade
 	from public.boletos 
 	where public.boletos.valor >= all ( select public.boletos.valor from public.boletos )
 
-	--3.4) Selecione todos os boletos que tem valores maiores que a media de todos os boletos por unidade
+--3.4) Selecione todos os boletos que tem valores maiores que a media de todos os boletos por unidade
 
 	select avg(public.boletos.valor), public.boletos.unidade
 	from public.boletos 
@@ -445,31 +446,31 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 
 # 4. uma consulta envolvendo a operação de junção definida na cláusula FROM;
 	
-	--4.1) todos os blocos do condominio 1
+--4.1) todos os blocos do condominio 1
 	select * from public.condominios as cond join public.blocos  as bloc on cond.codigo = bloc.codigo
 
 
 # 5. duas consultas envolvendo outer joins;
 
-	--5.1) todos avisos e todas as unidades
+--5.1) todos avisos e todas as unidades
 	
 	select c.nome, a.texto from public.condominios c FULL OUTER JOIN public.avisos a on c.codigo = a.id
 
-	--5.2) todos os contadores e todos condominios		
+--5.2) todos os contadores e todos condominios		
 	select c.nome, cont.nome from public.condominios c FULL OUTER JOIN public.contadores cont on c.codigo = cont.id
 
 # 6. duas consultas envolvendo agrupamentos e agregações;
 
-	--6.1 - media de todos boletos por mês
+--6.1 - media de todos boletos por mês
 
 	select avg(public.boletos.valor), boletos.mes from public.boletos group by public.boletos.mes
-	--6.2 - maior boleto 
+--6.2 - maior boleto 
 
 	select max(public.boletos.valor) from public.boletos
 
 # 7. uma consulta envolvendo a cláusula HAVING;
 
- 	--7.1) Quantidades de boletos  agrupados por mês, nos meses anteriores a junho 
+--7.1) Quantidades de boletos  agrupados por mês, nos meses anteriores a junho 
 
 		select count(*) as me, b.mes 
 		from public.boletos as b
@@ -478,27 +479,34 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 
 # 8. duas operações de inserção, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
 
-	--7.1) INSERT INTO public.avisos (condominio, id, resumo, datainicial, datafinal, texto) VALUES (1, 1, 'Eleições', 		'2018-12-21 10:24:41', '2019-12-21 10:24:41', 'Participe das Eleições de sindico');
+--7.1) Inserir um aviso para o condominio 1.
+
+	INSERT INTO public.avisos (condominio, id, resumo, datainicial, datafinal, texto) VALUES (1, 1, 'Eleições', '2018-12-21 10:24:41', '2019-12-21 10:24:41', 'Participe das Eleições de sindico');
 	
-	--7.1) INSERT INTO public.blocos (condominio, codigo, nome, nomepesquisa) VALUES (1, 1, 'A', 'Bloco A');
+--7.1) Inserir um bloco para o condomio 1.
+
+	INSERT INTO public.blocos (condominio, codigo, nome, nomepesquisa) VALUES (1, 1, 'A', 'Bloco A');
 	
 # 9. duas operações de deleção, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
 
-	--9.1 Deletando todos os  boltros da unidades do bloco 1
+--9.1) Deletando todos os  boltros da unidades do bloco 1
+	
 	delete from unidades using boletos where unidades.bloco = 1 and unidades.id = boletos.unidade;
 
-	--9.1) deltetando todos os avisos do condominio 1
+--9.1) deltetando todos os avisos do condominio 1
+	
 	delete from avisos as av where av.condominio = 1;	
 
 # 10. duas operações de modificação, sendo que pelo menos uma deverá envolver mais de uma tabela, isto é, tabelas envolvidas em restrições de integridade;
 	
-	10.1) Alterando o nome do condomidio 1 para 'FLAMBOYANT'
+--10.1) Alterando o nome do condomidio 1 para 'FLAMBOYANT'
 	
 		update condominios
 		set nome= 'FLAMBOYANT'
 		WHERE CODIGO=1
 		
-	11.1) 	Alterado todos os avisos dos condominio 1
+--11.1) Alterado todos os avisos dos condominio 1
+		
 		UPDATE avisos as c
 		SET resumo = 'Novo'
 		FROM condominios
@@ -506,15 +514,14 @@ Assim Usam Os identificadores do Condomínio ao qual ele está hospedado e das n
 	
 # 11. criação de duas visões;
 
-	--11.1)
+--11.1) Criar uma visão com todos o codigo de todos os seus contadores.
+
 	CREATE VIEW CONTGERAL as 
 	select contador  ,codigo 
 	from condominios as cond inner join contadores as cont on cond.contador = cont.id
 	
-	--11.2)
+--11.2)Criar uma visão com codigo do condomio, unidade, nome do morador e seus blocos.
+
 	create view bloc_uni as 
 	select condominio,codigo,unidade,nomemorador
 	from blocos natural join unidades
-
-
-
