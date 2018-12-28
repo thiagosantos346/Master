@@ -1,6 +1,3 @@
-**# Projeto de Banco de Dados 2018/2**
-Entrega do Trabalho
-scripts contendo expressões SQL (DDL e consultas)
 ## Criação e população do banco
 [Dump do banco.](https://github.com/thiagosantos346/Master/blob/master/dmp.sql)
 
