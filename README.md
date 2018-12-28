@@ -1,16 +1,16 @@
-## Criação e população do banco
+# Criação e população do banco
 [Dump do banco.](https://github.com/thiagosantos346/Master/blob/master/dmp.sql)
 
 A Lista de consultas sob o banco está no final.
 
 
-## Descrição do Mini mundo
+# Descrição do Mini mundo
 Foi pedido por uma agência de contabilidade que administra contas de condomínio e que registrasse os dados de seus condomínio;
 
 Sendo que cada contador possui, um nome, endereço telefone e-mail e tem a opção de registrar a opção de broquelar os boletos de todos o condomínios, pois essa regra é publica e afeta todo o condomínio, mas pode ser diferente para cada condomínio.
 
 
-Cada codomínio tem essa estrutura básica:
+# Cada codomínio tem essa estrutura básica:
 ## N Avisos:
 Os avisos são meios de comunicação do contador e do condomínio.
 Assim ele conta com Nome, código e um nome de pesquisa que pode ser usados como resumo, do aviso.
@@ -26,15 +26,15 @@ Cada uma dessa unidades, possuem um o numero do bloco que essa faz parte, e tamb
 ## Boletos:
   Dado uma combinação de Unidade e Condomínio se cria um boleto para controlar receitas do condomínio, e para isso usa um status que registra se esse foi pago, o numero da unidade vigente, o mês e ano do boleto, data exata do vencimento do boleto, data que esse foi pago, o valor do boleto e o valor recebido, e as observações que é usada para registrar instruções do boleto, como juros vigente em caso de vencimento ou não pagamento total.
 
-## Modelagem Conceitual
+# Modelagem Conceitual
 
    ![Modelo conceitual]( https://github.com/thiagosantos346/Master/blob/master/Modelos%20Prontos/Conceitual_1.png)
-## Modelagem Lógica
+# Modelagem Lógica
 
    ![Modelo Lógico](https://github.com/thiagosantos346/Master/blob/master/Modelos%20Prontos/model_er_2.png?raw=true)
    
 
-## Construção e População do Banco de Dados
+# Construção e População do Banco de Dados
  ` SET statement_timeout = 0;`
   `SET lock_timeout = 0;`
   `SET client_encoding = 'UTF8';`
@@ -341,7 +341,7 @@ Cada uma dessa unidades, possuem um o numero do bloco que essa faz parte, e tamb
   `GRANT ALL ON SCHEMA public TO postgres;`
   `GRANT ALL ON SCHEMA public TO PUBLIC;`
 
-## Especificação de Operações sobre o Banco de Dados
+# Especificação de Operações sobre o Banco de Dados
 
 ## 1. Duas consultas realizando duas operações diferentes sobre conjuntos (união, interseção ou diferença);
 ### 1.2) Selecione o dia de todas as movimentações de blocos e unidades, maiores ou iguais ao dia 1
@@ -471,7 +471,7 @@ Cada uma dessa unidades, possuem um o numero do bloco que essa faz parte, e tamb
 	`FROM condominios`
 	`WHERE condominio = codigo and comdomio = 1;`
 
-##11. criação de duas visões;
+## 11. criação de duas visões;
 
 ### 11.1) Criar uma visão com todos o codigo de todos os seus contadores.
 
